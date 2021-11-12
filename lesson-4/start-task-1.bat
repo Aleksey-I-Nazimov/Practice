@@ -1,0 +1,1 @@
+python task-1.py 8 1000 2000
