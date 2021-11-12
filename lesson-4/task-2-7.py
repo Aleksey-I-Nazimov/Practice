@@ -1,4 +1,3 @@
-
 # ---------------------------------------------------------------------
 # 2. Представлен список чисел. Необходимо вывести элементы исходного
 # списка, значения которых больше предыдущего элемента.
@@ -8,9 +7,10 @@
 # Результат: [12, 44, 4, 10, 78, 123].
 
 original_list = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
-new_list = [ original_list[index+1] for index in range(0,len(original_list)-1) if original_list[index+1]>original_list[index]]
-print ("2. Пример исходного списка: {}".format(original_list))
-print ("2. Результат: {}".format(new_list))
+new_list = [original_list[index + 1] for index in range(0, len(original_list) - 1) if
+            original_list[index + 1] > original_list[index]]
+print("2. Пример исходного списка: {}".format(original_list))
+print("2. Результат: {}".format(new_list))
 # -------------------------------------------------------------------
 
 
@@ -18,7 +18,8 @@ print ("2. Результат: {}".format(new_list))
 # 3. Для чисел в пределах от 20 до 240 найти числа, кратные 20 или 21.
 # Необходимо решить задание в одну строку.
 # Подсказка: использовать функцию range() и генератор.
-print ("3. Необходимо решить задание в одну строку: {}".format([number for number in range(20,241) if number%20==0 or number%21==0]))
+print("3. Необходимо решить задание в одну строку: {}".format(
+    [number for number in range(20, 241) if number % 20 == 0 or number % 21 == 0]))
 # -------------------------------------------------------------------
 
 
@@ -31,13 +32,13 @@ print ("3. Необходимо решить задание в одну стро
 # Результат: [23, 1, 3, 10, 4, 11]
 duplicated_number_list = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
 number_map = {}
-for element in duplicated_number_list :
+for element in duplicated_number_list:
     if element in number_map:
-        number_map[element]+=1
+        number_map[element] += 1
     else:
-        number_map[element]=0
-print (number_map)
-print ("Результат: {}".format([element for element in duplicated_number_list if number_map[element]==0]))
+        number_map[element] = 0
+print(number_map)
+print("Результат: {}".format([element for element in duplicated_number_list if number_map[element] == 0]))
 # ---------------------------------------------------------------------
 
 
@@ -48,13 +49,16 @@ print ("Результат: {}".format([element for element in duplicated_number
 # всех элементов списка.
 # Подсказка: использовать функцию reduce()
 from functools import reduce
-def multiplier (m1,m2):
-    result = float(m1)*float(m2)
-    print (f"{m1}*{m2}={result}")
+
+
+def multiplier(m1, m2):
+    result = float(m1) * float(m2)
+    print(f"{m1}*{m2}={result}")
     return result
 
-generated_list = [number for number in range(100,1001) if number%2==0]
-print("Result={}".format(reduce(multiplier,generated_list)))
+
+generated_list = [number for number in range(100, 1001) if number % 2 == 0]
+print("Result={}".format(reduce(multiplier, generated_list)))
 # -------------------------------------------------------------------
 
 
@@ -70,25 +74,46 @@ print("Result={}".format(reduce(multiplier,generated_list)))
 # предусмотреть условие, при котором повторение элементов списка будет прекращено.
 # A
 from itertools import count
+
 start_point = 3
 for element in count(start_point):
-    print (element)
-    if element==10: break
+    print(f"6. count_element={element}")
+    if element == 10: break
 # B
 from itertools import cycle
+
 element_map = {}
-for element in cycle([1,2,3]):
-   if element in element_map:
-       break
-   else:
-       element_map[element]=element
-       print (element)
-# --------------------------------------------------------------------
+for element in cycle([1, 2, 3]):
+    if element in element_map:
+        break
+    else:
+        element_map[element] = element
+        print(f"6. cycle_element={element}")
 
 
 # --------------------------------------------------------------------
-def fact (n):
-    yield n
 
-for el in fact(10) :
-    print(el)
+
+# --------------------------------------------------------------------
+# 7. Реализовать генератор с помощью функции с ключевым словом yield,
+# создающим очередное значение. При вызове функции должен создаваться
+# объект-генератор. Функция должна вызываться следующим образом:
+# for el in fact(n). Функция отвечает за получение факториала числа,
+# а в цикле необходимо выводить только первые n чисел, начиная с 1! и до n!.
+# Подсказка: факториал числа n — произведение чисел от 1 до n.
+# Например, факториал четырёх 4! = 1 * 2 * 3 * 4 = 24.
+def fact(limit):
+    for el in range(1, limit + 1):
+        yield el
+
+
+n = 10
+for element in range(1, n):
+    yield_object = fact(element)
+    yield_list = [element for element in yield_object]
+    print(yield_list)
+    fact_value = 1
+    if len(yield_list) > 1:
+        fact_value = reduce(multiplier, yield_list)
+    print(f"7. {element}! = {fact_value}")
+# -------------------------------------------------------------------
