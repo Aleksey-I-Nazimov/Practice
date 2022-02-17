@@ -1,0 +1,3 @@
+
+https://realpython.com/brython-python-in-browser/
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
